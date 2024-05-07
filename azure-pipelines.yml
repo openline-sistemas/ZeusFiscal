@@ -296,7 +296,7 @@ steps:
   inputs:
     command: 'build'
     projects: './DFe.Classes/DFe.Classes.csproj'
-    arguments: '--no-restore -f net48 -c "Release"'
+    arguments: '--no-restore -f net462 -c "Release"'
     workingDirectory: '$(Build.SourcesDirectory)'
 
 - task: DotNetCoreCLI@2
@@ -304,7 +304,7 @@ steps:
   inputs:
     command: 'build'
     projects: './DFe.Utils/DFe.Utils.csproj'
-    arguments: '--no-restore -f net48 -c "Release"'
+    arguments: '--no-restore -f net462 -c "Release"'
     workingDirectory: '$(Build.SourcesDirectory)'
 
 - task: DotNetCoreCLI@2
@@ -312,7 +312,7 @@ steps:
   inputs:
     command: 'build'
     projects: './DFe.Wsdl/DFe.Wsdl.csproj'
-    arguments: '--no-restore -f net48 -c "Release"'
+    arguments: '--no-restore -f net462 -c "Release"'
     workingDirectory: '$(Build.SourcesDirectory)'
 
 - task: DotNetCoreCLI@2
@@ -320,7 +320,7 @@ steps:
   inputs:
     command: 'build'
     projects: './NFe.Classes/NFe.Classes.csproj'
-    arguments: '--no-restore -f net48 -c "Release"'
+    arguments: '--no-restore -f net462 -c "Release"'
     workingDirectory: '$(Build.SourcesDirectory)'
 
 - task: DotNetCoreCLI@2
@@ -328,7 +328,7 @@ steps:
   inputs:
     command: 'build'
     projects: './NFe.Servicos/NFe.Servicos.csproj'
-    arguments: '--no-restore -f net48 -c "Release"'
+    arguments: '--no-restore -f net462 -c "Release"'
     workingDirectory: '$(Build.SourcesDirectory)'
 
 - task: DotNetCoreCLI@2
@@ -336,7 +336,7 @@ steps:
   inputs:
     command: 'build'
     projects: './NFe.Utils/NFe.Utils.csproj'
-    arguments: '--no-restore -f net48 -c "Release"'
+    arguments: '--no-restore -f net462 -c "Release"'
     workingDirectory: '$(Build.SourcesDirectory)'
 
 - task: DotNetCoreCLI@2
@@ -344,7 +344,7 @@ steps:
   inputs:
     command: 'build'
     projects: './NFe.Wsdl/NFe.Wsdl.csproj'
-    arguments: '--no-restore -f net48 -c "Release"'
+    arguments: '--no-restore -f net462 -c "Release"'
     workingDirectory: '$(Build.SourcesDirectory)'
 
 - task: DotNetCoreCLI@2
@@ -352,7 +352,7 @@ steps:
   inputs:
     command: 'build'
     projects: './NFe.Danfe.Fast/NFe.Danfe.Fast.csproj'
-    arguments: '--no-restore -f net48 -c "Release"'
+    arguments: '--no-restore -f net462 -c "Release"'
     workingDirectory: '$(Build.SourcesDirectory)'
 
 - task: DotNetCoreCLI@2
@@ -360,7 +360,7 @@ steps:
   inputs:
     command: 'build'
     projects: './MDFe.Classes/MDFe.Classes.csproj'
-    arguments: '--no-restore -f net48 -c "Release"'
+    arguments: '--no-restore -f net462 -c "Release"'
     workingDirectory: '$(Build.SourcesDirectory)'
 
 - task: DotNetCoreCLI@2
@@ -368,7 +368,7 @@ steps:
   inputs:
     command: 'build'
     projects: './MDFe.Utils/MDFe.Utils.csproj'
-    arguments: '--no-restore -f net48 -c "Release"'
+    arguments: '--no-restore -f net462 -c "Release"'
     workingDirectory: '$(Build.SourcesDirectory)'
 
 - task: DotNetCoreCLI@2
@@ -376,7 +376,7 @@ steps:
   inputs:
     command: 'build'
     projects: './MDFe.Wsdl/MDFe.Wsdl.csproj'
-    arguments: '--no-restore -f net48 -c "Release"'
+    arguments: '--no-restore -f net462 -c "Release"'
     workingDirectory: '$(Build.SourcesDirectory)'
 
 - task: DotNetCoreCLI@2
@@ -384,7 +384,7 @@ steps:
   inputs:
     command: 'build'
     projects: './MDFe.Servicos/MDFe.Servicos.csproj'
-    arguments: '--no-restore -f net48 -c "Release"'
+    arguments: '--no-restore -f net462 -c "Release"'
     workingDirectory: '$(Build.SourcesDirectory)'
 
 - task: DotNetCoreCLI@2
@@ -392,7 +392,7 @@ steps:
   inputs:
     command: 'build'
     projects: './CTe.Classes/CTe.Classes.csproj'
-    arguments: '--no-restore -f net48 -c "Release"'
+    arguments: '--no-restore -f net462 -c "Release"'
     workingDirectory: '$(Build.SourcesDirectory)'
 
 - task: DotNetCoreCLI@2
@@ -400,7 +400,7 @@ steps:
   inputs:
     command: 'build'
     projects: './CTe.Utils/CTe.Utils.csproj'
-    arguments: '--no-restore -f net48 -c "Release"'
+    arguments: '--no-restore -f net462 -c "Release"'
     workingDirectory: '$(Build.SourcesDirectory)'
 
 - task: DotNetCoreCLI@2
@@ -408,7 +408,7 @@ steps:
   inputs:
     command: 'build'
     projects: './CTe.Wsdl/CTe.Wsdl.csproj'
-    arguments: '--no-restore -f net48 -c "Release"'
+    arguments: '--no-restore -f net462 -c "Release"'
     workingDirectory: '$(Build.SourcesDirectory)'
 
 - task: DotNetCoreCLI@2
@@ -416,7 +416,7 @@ steps:
   inputs:
     command: 'build'
     projects: './CTe.Servicos/CTe.Servicos.csproj'
-    arguments: '--no-restore -f net48 -c "Release"'
+    arguments: '--no-restore -f net462 -c "Release"'
     workingDirectory: '$(Build.SourcesDirectory)'
 
 
