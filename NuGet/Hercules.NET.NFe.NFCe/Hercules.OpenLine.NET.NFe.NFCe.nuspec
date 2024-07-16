@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>Hercules.Openline.NET.NFe.NFCe</id>
-        <version>1.0.0.0</version>
+        <version>1.1.0.0</version>
         <title>Hercules.NET Openline NF-e e NFC-e</title>
         <authors>Hercules.NET</authors>
         <owners>Hercules.NET</owners>
@@ -10,7 +10,7 @@
         <iconUrl>https://avatars.githubusercontent.com/u/165974473</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Biblioteca para geração de nf-e e nfc-e.</description>
-		<releaseNotes>Correção de dependencias de fast report</releaseNotes>
+		<releaseNotes>Atualizacao de mudanças com repositório original</releaseNotes>
         <copyright>Hercules.NET</copyright>
         <language>pt-BR</language>
         <tags>nfc-e nf-e nfce nfe</tags>
