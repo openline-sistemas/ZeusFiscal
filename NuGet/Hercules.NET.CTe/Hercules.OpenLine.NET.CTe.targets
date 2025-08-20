@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+	<Target Name="AfterBuild">
+		<Copy
+		  SourceFiles="$(MSBuildThisFileDirectory)CTe\CTeEvento.frx"
+		  DestinationFiles="$(OutDir)\CTe\CTeEvento.frx"
+		  SkipUnchangedFiles="false"
+		  OverwriteReadOnlyFiles="true"
+		  Retries="3"
+		  RetryDelayMilliseconds="300" />
+		<Copy
+		  SourceFiles="$(MSBuildThisFileDirectory)CTe\CTeRetrato.frx"
+		  DestinationFiles="$(OutDir)\CTe\CTeRetrato.frx"
+		  SkipUnchangedFiles="false"
+		  OverwriteReadOnlyFiles="true"
+		  Retries="3"
+		  RetryDelayMilliseconds="300" />
+	</Target>
+	
+	
+	<Target Name="CopyFilesToProject" BeforeTargets="BeforeBuild">
+		<Copy
+		  SourceFiles="$(MSBuildThisFileDirectory)CTe\CTeEvento.frx"
+		  DestinationFiles="$(OutDir)\CTe\CTeEvento.frx"
+		  SkipUnchangedFiles="false"
+		  OverwriteReadOnlyFiles="true"
+		  Retries="3"
+		  RetryDelayMilliseconds="300" />
+		<Copy
+		  SourceFiles="$(MSBuildThisFileDirectory)CTe\CTeRetrato.frx"
+		  DestinationFiles="$(OutDir)\CTe\CTeRetrato.frx"
+		  SkipUnchangedFiles="false"
+		  OverwriteReadOnlyFiles="true"
+		  Retries="3"
+		  RetryDelayMilliseconds="300" />
+	</Target>
+	
+	<Target Name="PublishCopyFiles" AfterTargets="Publish">
+		<Copy
+		  SourceFiles="$(MSBuildThisFileDirectory)CTe\CTeEvento.frx"
+		  DestinationFiles="$(PublishDir)\CTe\CTeEvento.frx"
+		  SkipUnchangedFiles="false"
+		  OverwriteReadOnlyFiles="true"
+		  Retries="3"
+		  RetryDelayMilliseconds="300" />
+		<Copy
+		  SourceFiles="$(MSBuildThisFileDirectory)CTe\CTeRetrato.frx"
+		  DestinationFiles="$(PublishDir)\CTe\CTeRetrato.frx"
+		  SkipUnchangedFiles="false"
+		  OverwriteReadOnlyFiles="true"
+		  Retries="3"
+		  RetryDelayMilliseconds="300" />
+	</Target>
+	
+</Project>
