@@ -15,638 +15,198 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+  
+  
+  #########################################################
+  # Parte de CTE e MDFe Comentado para deploy mais rápido #
+  # #######################################################
+
+
   - task: NuGetToolInstaller@1
-  
-  ############################################################################
-  #############################  Build net 8.0 ###############################
-  ############################################################################
-
 
   - task: DotNetCoreCLI@2
-    displayName: Build DFe.Classes net 8.0
+    displayName: "Build DFe Classes"
     inputs:
       command: 'build'
       projects: './DFe.Classes/DFe.Classes.csproj'
-      arguments: '-f net8.0 -c "Release"'
+      arguments: '-c "Release"'
       workingDirectory: '$(Build.SourcesDirectory)'
 
   - task: DotNetCoreCLI@2
-    displayName: Build DFe.Utils net 8.0
+    displayName: "Build DFe Utils"
     inputs:
       command: 'build'
-      projects: './DFe.Utils/DFe.Utils.csproj'
-      arguments: '-f net8.0 -c "Release"'
+      projects: './DFe.Classes/DFe.Classes.csproj'
+      arguments: '-c "Release"'
       workingDirectory: '$(Build.SourcesDirectory)'
 
   - task: DotNetCoreCLI@2
-    displayName: Build DFe.Wsdl net 8.0
+    displayName: "Build DFe Wsdl"
     inputs:
       command: 'build'
       projects: './DFe.Wsdl/DFe.Wsdl.csproj'
-      arguments: '-f net8.0 -c "Release"'
+      arguments: '-c "Release"'
       workingDirectory: '$(Build.SourcesDirectory)'
 
   - task: DotNetCoreCLI@2
-    displayName: Build NFe.Classes net 8.0
+    displayName: "Build Nfe Classes"
     inputs:
       command: 'build'
       projects: './NFe.Classes/NFe.Classes.csproj'
-      arguments: '-f net8.0 -c "Release"'
+      arguments: '-c "Release"'
       workingDirectory: '$(Build.SourcesDirectory)'
 
   - task: DotNetCoreCLI@2
-    displayName: Build NFe.Servicos net 8.0
+    displayName: "Build Nfe Servicos"
     inputs:
       command: 'build'
       projects: './NFe.Servicos/NFe.Servicos.csproj'
-      arguments: '-f net8.0 -c "Release"'
+      arguments: '-c "Release"'
       workingDirectory: '$(Build.SourcesDirectory)'
 
   - task: DotNetCoreCLI@2
-    displayName: Build NFe.Utils net 8.0
+    displayName: "Build Nfe Utils"
     inputs:
       command: 'build'
       projects: './NFe.Utils/NFe.Utils.csproj'
-      arguments: '-f net8.0 -c "Release"'
+      arguments: '-c "Release"'
       workingDirectory: '$(Build.SourcesDirectory)'
 
   - task: DotNetCoreCLI@2
-    displayName: Build NFe.Wsdl net 8.0
+    displayName: "Build Nfe Wsdl Standard"
     inputs:
       command: 'build'
       projects: './NFe.Wsdl.Standard/NFe.Wsdl.Standard.csproj'
-      arguments: '-f net8.0 -c "Release"'
+      arguments: '-c "Release"'
       workingDirectory: '$(Build.SourcesDirectory)'
 
   - task: DotNetCoreCLI@2
-    displayName: Build NFe.Danfe.OpenFast net 8.0
+    displayName: "Build Nfe Danfe Base"
+    inputs:
+      command: 'build'
+      projects: './NFe.Danfe.Base/NFe.Danfe.Base.csproj'
+      arguments: '-c "Release"'
+      workingDirectory: '$(Build.SourcesDirectory)'
+
+  - task: DotNetCoreCLI@2
+    displayName: "Build Nfe Danfe Open Fast"
     inputs:
       command: 'build'
       projects: './NFe.Danfe.OpenFast/NFe.Danfe.OpenFast.csproj'
-      arguments: '-f net8.0 -c "Release"'
+      arguments: '-c "Release"'
       workingDirectory: '$(Build.SourcesDirectory)'
 
   - task: DotNetCoreCLI@2
-    displayName: Build MDFe.Classes net 8.0
+    displayName: "Build Nfe Danfe Fast Skia"
     inputs:
       command: 'build'
-      projects: './MDFe.Classes/MDFe.Classes.csproj'
-      arguments: '-f net8.0 -c "Release"'
+      projects: './NFe.Danfe.Fast.Skia/NFe.Danfe.Fast.Skia.csproj'
+      arguments: '-c "Release"'
       workingDirectory: '$(Build.SourcesDirectory)'
 
   - task: DotNetCoreCLI@2
-    displayName: Build MDFe.Utils net 8.0
-    inputs:
-      command: 'build'
-      projects: './MDFe.Utils/MDFe.Utils.csproj'
-      arguments: '-f net8.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build MDFe.Wsdl net 8.0
-    inputs:
-      command: 'build'
-      projects: './MDFe.Wsdl/MDFe.Wsdl.csproj'
-      arguments: '-f net8.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build MDFe.Servicos net 8.0
-    inputs:
-      command: 'build'
-      projects: './MDFe.Servicos/MDFe.Servicos.csproj'
-      arguments: '-f net8.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build MDFe.Damdfe.OpenFast net 8.0
-    inputs:
-      command: 'build'
-      projects: './MDFe.Damdfe.OpenFast/MDFe.Damdfe.OpenFast.csproj'
-      arguments: '-f net8.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build CTe.Classes net 8.0
-    inputs:
-      command: 'build'
-      projects: './CTe.Classes/CTe.Classes.csproj'
-      arguments: '-f net8.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build CTe.Utils net 8.0
-    inputs:
-      command: 'build'
-      projects: './CTe.Utils/CTe.Utils.csproj'
-      arguments: '-f net8.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build CTe.Wsdl net 8.0
-    inputs:
-      command: 'build'
-      projects: './CTe.Wsdl/CTe.Wsdl.csproj'
-      arguments: '-f net8.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build CTe.Servicos net 8.0
-    inputs:
-      command: 'build'
-      projects: './CTe.Servicos/CTe.Servicos.csproj'
-      arguments: '-f net8.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build CTe.Dacte.Base net 8.0
-    inputs:
-      command: 'build'
-      projects: './CTe.Dacte.Base/CTe.Dacte.Base.csproj'
-      arguments: '-f net8.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build CTe.Dacte.Base net 8.0
-    inputs:
-      command: 'build'
-      projects: './CTe.Dacte.OpenFast/CTe.Dacte.OpenFast.csproj'
-      arguments: '-f net8.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-      
-  ############################################################################
-  #############################  Build net 9.0 ###############################
-  ############################################################################
-
-
-  - task: DotNetCoreCLI@2
-    displayName: Build DFe.Classes net 9.0
-    inputs:
-      command: 'build'
-      projects: './DFe.Classes/DFe.Classes.csproj'
-      arguments: '-f net9.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build DFe.Utils net 9.0
-    inputs:
-      command: 'build'
-      projects: './DFe.Utils/DFe.Utils.csproj'
-      arguments: '-f net9.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build DFe.Wsdl net 9.0
-    inputs:
-      command: 'build'
-      projects: './DFe.Wsdl/DFe.Wsdl.csproj'
-      arguments: '-f net9.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build NFe.Classes net 9.0
-    inputs:
-      command: 'build'
-      projects: './NFe.Classes/NFe.Classes.csproj'
-      arguments: '-f net9.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build NFe.Servicos net 9.0
-    inputs:
-      command: 'build'
-      projects: './NFe.Servicos/NFe.Servicos.csproj'
-      arguments: '-f net9.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build NFe.Utils net 9.0
-    inputs:
-      command: 'build'
-      projects: './NFe.Utils/NFe.Utils.csproj'
-      arguments: '-f net9.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build NFe.Wsdl net 9.0
-    inputs:
-      command: 'build'
-      projects: './NFe.Wsdl.Standard/NFe.Wsdl.Standard.csproj'
-      arguments: '-f net9.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build NFe.Danfe.OpenFast net 9.0
-    inputs:
-      command: 'build'
-      projects: './NFe.Danfe.OpenFast/NFe.Danfe.OpenFast.csproj'
-      arguments: '-f net9.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build MDFe.Classes net 9.0
-    inputs:
-      command: 'build'
-      projects: './MDFe.Classes/MDFe.Classes.csproj'
-      arguments: '-f net9.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build MDFe.Utils net 9.0
-    inputs:
-      command: 'build'
-      projects: './MDFe.Utils/MDFe.Utils.csproj'
-      arguments: '-f net9.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build MDFe.Wsdl net 9.0
-    inputs:
-      command: 'build'
-      projects: './MDFe.Wsdl/MDFe.Wsdl.csproj'
-      arguments: '-f net9.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build MDFe.Servicos net 9.0
-    inputs:
-      command: 'build'
-      projects: './MDFe.Servicos/MDFe.Servicos.csproj'
-      arguments: '-f net9.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build MDFe.Damdfe.OpenFast net 9.0
-    inputs:
-      command: 'build'
-      projects: './MDFe.Damdfe.OpenFast/MDFe.Damdfe.OpenFast.csproj'
-      arguments: '-f net9.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build CTe.Classes net 9.0
-    inputs:
-      command: 'build'
-      projects: './CTe.Classes/CTe.Classes.csproj'
-      arguments: '-f net9.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build CTe.Utils net 9.0
-    inputs:
-      command: 'build'
-      projects: './CTe.Utils/CTe.Utils.csproj'
-      arguments: '-f net9.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build CTe.Wsdl net 9.0
-    inputs:
-      command: 'build'
-      projects: './CTe.Wsdl/CTe.Wsdl.csproj'
-      arguments: '-f net9.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build CTe.Servicos net 9.0
-    inputs:
-      command: 'build'
-      projects: './CTe.Servicos/CTe.Servicos.csproj'
-      arguments: '-f net9.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build CTe.Dacte.Base net 9.0
-    inputs:
-      command: 'build'
-      projects: './CTe.Dacte.Base/CTe.Dacte.Base.csproj'
-      arguments: '-f net9.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build CTe.Dacte.Base net 9.0
-    inputs:
-      command: 'build'
-      projects: './CTe.Dacte.OpenFast/CTe.Dacte.OpenFast.csproj'
-      arguments: '-f net9.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-  
-  ############################################################################
-  ########################  Build net Standard 2.0 ###########################
-  ############################################################################
-
-  - task: DotNetCoreCLI@2
-    displayName: Build DFe.Classes net standard 2.0
-    inputs:
-      command: 'build'
-      projects: './DFe.Classes/DFe.Classes.csproj'
-      arguments: '-f netstandard2.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build DFe.Utils net standard 2.0
-    inputs:
-      command: 'build'
-      projects: './DFe.Utils/DFe.Utils.csproj'
-      arguments: '-f netstandard2.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build DFe.Wsdl net standard 2.0
-    inputs:
-      command: 'build'
-      projects: './DFe.Wsdl/DFe.Wsdl.csproj'
-      arguments: '-f netstandard2.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build NFe.Classes net standard 2.0
-    inputs:
-      command: 'build'
-      projects: './NFe.Classes/NFe.Classes.csproj'
-      arguments: '-f netstandard2.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build NFe.Servicos net standard 2.0
-    inputs:
-      command: 'build'
-      projects: './NFe.Servicos/NFe.Servicos.csproj'
-      arguments: '-f netstandard2.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build NFe.Utils net standard 2.0
-    inputs:
-      command: 'build'
-      projects: './NFe.Utils/NFe.Utils.csproj'
-      arguments: '-f netstandard2.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build NFe.Wsdl net standard 2.0
-    inputs:
-      command: 'build'
-      projects: './NFe.Wsdl.Standard/NFe.Wsdl.Standard.csproj'
-      arguments: '-f netstandard2.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build NFe.Danfe.OpenFast net standard 2.0
-    inputs:
-      command: 'build'
-      projects: './NFe.Danfe.OpenFast/NFe.Danfe.OpenFast.csproj'
-      arguments: '-f netstandard2.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build MDFe.Classes net standard 2.0
-    inputs:
-      command: 'build'
-      projects: './MDFe.Classes/MDFe.Classes.csproj'
-      arguments: '-f netstandard2.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build MDFe.Utils net standard 2.0
-    inputs:
-      command: 'build'
-      projects: './MDFe.Utils/MDFe.Utils.csproj'
-      arguments: '-f netstandard2.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build MDFe.Wsdl net standard 2.0
-    inputs:
-      command: 'build'
-      projects: './MDFe.Wsdl/MDFe.Wsdl.csproj'
-      arguments: '-f netstandard2.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build MDFe.Servicos net standard 2.0
-    inputs:
-      command: 'build'
-      projects: './MDFe.Servicos/MDFe.Servicos.csproj'
-      arguments: '-f netstandard2.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build MDFe.Damdfe.OpenFast net standard 2.0
-    inputs:
-      command: 'build'
-      projects: './MDFe.Damdfe.OpenFast/MDFe.Damdfe.OpenFast.csproj'
-      arguments: '-f netstandard2.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build CTe.Classes net standard 2.0
-    inputs:
-      command: 'build'
-      projects: './CTe.Classes/CTe.Classes.csproj'
-      arguments: '-f netstandard2.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build CTe.Utils net standard 2.0
-    inputs:
-      command: 'build'
-      projects: './CTe.Utils/CTe.Utils.csproj'
-      arguments: '-f netstandard2.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build CTe.Wsdl net standard 2.0
-    inputs:
-      command: 'build'
-      projects: './CTe.Wsdl/CTe.Wsdl.csproj'
-      arguments: '-f netstandard2.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build CTe.Servicos net standard 2.0
-    inputs:
-      command: 'build'
-      projects: './CTe.Servicos/CTe.Servicos.csproj'
-      arguments: '-f netstandard2.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build CTe.Dacte.Base net standard 2.0
-    inputs:
-      command: 'build'
-      projects: './CTe.Dacte.Base/CTe.Dacte.Base.csproj'
-      arguments: '-f netstandard2.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build CTe.Dacte.Base net standard 2.0
-    inputs:
-      command: 'build'
-      projects: './CTe.Dacte.OpenFast/CTe.Dacte.OpenFast.csproj'
-      arguments: '-f netstandard2.0 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-  
-  ############################################################################
-  ########################  Build net Framework 4.8 ###########################
-  ############################################################################
-
-  - task: DotNetCoreCLI@2
-    displayName: Build DFe.Classes net Framework 4.8
-    inputs:
-      command: 'build'
-      projects: './DFe.Classes/DFe.Classes.csproj'
-      arguments: '-f net462 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build DFe.Utils net Framework 4.8
-    inputs:
-      command: 'build'
-      projects: './DFe.Utils/DFe.Utils.csproj'
-      arguments: '-f net462 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build DFe.Wsdl net Framework 4.8
-    inputs:
-      command: 'build'
-      projects: './DFe.Wsdl/DFe.Wsdl.csproj'
-      arguments: '-f net462 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build NFe.Classes net Framework 4.8
-    inputs:
-      command: 'build'
-      projects: './NFe.Classes/NFe.Classes.csproj'
-      arguments: '-f net462 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build NFe.Servicos net Framework 4.8
-    inputs:
-      command: 'build'
-      projects: './NFe.Servicos/NFe.Servicos.csproj'
-      arguments: '-f net462 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build NFe.Utils net Framework 4.8
-    inputs:
-      command: 'build'
-      projects: './NFe.Utils/NFe.Utils.csproj'
-      arguments: '-f net462 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build NFe.Wsdl net Framework 4.8
-    inputs:
-      command: 'build'
-      projects: './NFe.Wsdl/NFe.Wsdl.csproj'
-      arguments: '-f net462 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build NFe.Danfe.Fast net Framework 4.8
+    displayName: "Build Nfe Danfe Fast"
     inputs:
       command: 'build'
       projects: './NFe.Danfe.Fast/NFe.Danfe.Fast.csproj'
-      arguments: '-f net462 -c "Release"'
+      arguments: '-c "Release"'
       workingDirectory: '$(Build.SourcesDirectory)'
 
-  - task: DotNetCoreCLI@2
-    displayName: Build MDFe.Classes net Framework 4.8
-    inputs:
-      command: 'build'
-      projects: './MDFe.Classes/MDFe.Classes.csproj'
-      arguments: '-f net462 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build MDFe.Utils net Framework 4.8
-    inputs:
-      command: 'build'
-      projects: './MDFe.Utils/MDFe.Utils.csproj'
-      arguments: '-f net462 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build MDFe.Wsdl net Framework 4.8
-    inputs:
-      command: 'build'
-      projects: './MDFe.Wsdl/MDFe.Wsdl.csproj'
-      arguments: '-f net462 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build MDFe.Servicos net Framework 4.8
-    inputs:
-      command: 'build'
-      projects: './MDFe.Servicos/MDFe.Servicos.csproj'
-      arguments: '-f net462 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build MDFe.Damdfe.OpenFast net Framework 4.8
-    inputs:
-      command: 'build'
-      projects: './MDFe.Damdfe.Fast/MDFe.Damdfe.Fast.csproj'
-      arguments: '-f net462 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build CTe.Classes net Framework 4.8
-    inputs:
-      command: 'build'
-      projects: './CTe.Classes/CTe.Classes.csproj'
-      arguments: '-f net462 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build CTe.Utils net Framework 4.8
-    inputs:
-      command: 'build'
-      projects: './CTe.Utils/CTe.Utils.csproj'
-      arguments: '-f net462 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build CTe.Wsdl net Framework 4.8
-    inputs:
-      command: 'build'
-      projects: './CTe.Wsdl/CTe.Wsdl.csproj'
-      arguments: '-f net462 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build CTe.Servicos net Framework 4.8
-    inputs:
-      command: 'build'
-      projects: './CTe.Servicos/CTe.Servicos.csproj'
-      arguments: '-f net462 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build CTe.Dacte.Base net Framework 4.8
-    inputs:
-      command: 'build'
-      projects: './CTe.Dacte.Base/CTe.Dacte.Base.csproj'
-      arguments: '-f net462 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build CTe.Dacte.Base net Framework 4.8
-    inputs:
-      command: 'build'
-      projects: './CTe.Dacte.Fast/CTe.Dacte.Fast.csproj'
-      arguments: '-f net462 -c "Release"'
-      workingDirectory: '$(Build.SourcesDirectory)'
-  
-  ###############################################################################
-  ########################  Geração dos pacotes nupkg ###########################
-  ###############################################################################
-
+#  - task: DotNetCoreCLI@2
+#    displayName: "Build Mdfe Classes"
+#    inputs:
+#      command: 'build'
+#      projects: './MDFe.Classes/MDFe.Classes.csproj'
+#      arguments: '-c "Release"'
+#      workingDirectory: '$(Build.SourcesDirectory)'
+#
+#  - task: DotNetCoreCLI@2
+#    displayName: "Build Mdfe Utils"
+#    inputs:
+#      command: 'build'
+#      projects: './MDFe.Utils/MDFe.Utils.csproj'
+#      arguments: '-c "Release"'
+#      workingDirectory: '$(Build.SourcesDirectory)'
+#
+#  - task: DotNetCoreCLI@2
+#    displayName: "Build Mdfe Wsdl"
+#    inputs:
+#      command: 'build'
+#      projects: './MDFe.Wsdl/MDFe.Wsdl.csproj'
+#      arguments: '-c "Release"'
+#      workingDirectory: '$(Build.SourcesDirectory)'
+#
+#  - task: DotNetCoreCLI@2
+#    displayName: "Build Mdfe Servicos"
+#    inputs:
+#      command: 'build'
+#      projects: './MDFe.Servicos/MDFe.Servicos.csproj'
+#      arguments: '-c "Release"'
+#      workingDirectory: '$(Build.SourcesDirectory)'
+#
+#  - task: DotNetCoreCLI@2
+#    displayName: "Build Damdfe OpenFast"
+#    inputs:
+#      command: 'build'
+#      projects: './MDFe.Damdfe.OpenFast/MDFe.Damdfe.OpenFast.csproj'
+#      arguments: '-c "Release"'
+#      workingDirectory: '$(Build.SourcesDirectory)'
+#
+#  - task: DotNetCoreCLI@2
+#    displayName: "Build Cte Classes"
+#    inputs:
+#      command: 'build'
+#      projects: './CTe.Classes/CTe.Classes.csproj'
+#      arguments: '-c "Release"'
+#      workingDirectory: '$(Build.SourcesDirectory)'
+#
+#  - task: DotNetCoreCLI@2
+#    displayName: "Build Cte Utils"
+#    inputs:
+#      command: 'build'
+#      projects: './CTe.Utils/CTe.Utils.csproj'
+#      arguments: '-c "Release"'
+#      workingDirectory: '$(Build.SourcesDirectory)'
+#
+#  - task: DotNetCoreCLI@2
+#    displayName: "Build Cte Wsdl"
+#    inputs:
+#      command: 'build'
+#      projects: './CTe.Wsdl/CTe.Wsdl.csproj'
+#      arguments: '-c "Release"'
+#      workingDirectory: '$(Build.SourcesDirectory)'
+#
+#  - task: DotNetCoreCLI@2
+#    displayName: "Build Cte Servicos"
+#    inputs:
+#      command: 'build'
+#      projects: './CTe.Servicos/CTe.Servicos.csproj'
+#      arguments: '-c "Release"'
+#      workingDirectory: '$(Build.SourcesDirectory)'
+#
+#  - task: DotNetCoreCLI@2
+#    displayName: "Build Cte Dacte Base"
+#    inputs:
+#      command: 'build'
+#      projects: './CTe.Dacte.Base/CTe.Dacte.Base.csproj'
+#      arguments: '-c "Release"'
+#      workingDirectory: '$(Build.SourcesDirectory)'
+#
+#  - task: DotNetCoreCLI@2
+#    displayName: "Build Cte Dacte OpenFast"
+#    inputs:
+#      command: 'build'
+#      projects: './CTe.Dacte.OpenFast/CTe.Dacte.OpenFast.csproj'
+#      arguments: '-c "Release"'
+#      workingDirectory: '$(Build.SourcesDirectory)'
+#
+#  - task: DotNetCoreCLI@2
+#    displayName: "Build Cte Dacte Fast"
+#    inputs:
+#      command: 'build'
+#      projects: './CTe.Dacte.Fast/CTe.Dacte.Fast.csproj'
+#      arguments: '-c "Release"'
+#      workingDirectory: '$(Build.SourcesDirectory)'
 
   - task: NuGetCommand@2
     displayName: Gera Pacote Hercules.OpenLine.Net.NFe.NFCe
@@ -663,19 +223,17 @@ steps:
       ArtifactName: 'hercules.dfe'
       publishLocation: 'Container'
 
-  - task: NuGetCommand@2
-    displayName: Gera Pacote Hercules.OpenLine.NET.CTe
-    inputs:
-      command: 'pack'
-      packagesToPack: '$(Build.SourcesDirectory)/NuGet/Hercules.NET.CTe/Hercules.OpenLine.NET.CTe.nuspec'
-      packDestination: '$(Build.ArtifactStagingDirectory)/Hercules.OpenLine.NET.CTe.nupkg'
-      versioningScheme: 'off'
-
-  - task: PublishBuildArtifacts@1
-    displayName: Publica Aterfato Hercules.OpenLine.NET.CTe
-    inputs:
-      PathtoPublish: '$(Build.ArtifactStagingDirectory)/Hercules.OpenLine.NET.CTe.nupkg'
-      ArtifactName: 'hercules.cte'
-      publishLocation: 'Container'
-
-
+#  - task: NuGetCommand@2
+#    displayName: Gera Pacote Hercules.OpenLine.NET.CTe
+#    inputs:
+#      command: 'pack'
+#      packagesToPack: '$(Build.SourcesDirectory)/NuGet/Hercules.NET.CTe/Hercules.OpenLine.NET.CTe.nuspec'
+#      packDestination: '$(Build.ArtifactStagingDirectory)/Hercules.OpenLine.NET.CTe.nupkg'
+#      versioningScheme: 'off'
+#  
+#  - task: PublishBuildArtifacts@1
+#    displayName: Publica Aterfato Hercules.OpenLine.NET.CTe
+#    inputs:
+#      PathtoPublish: '$(Build.ArtifactStagingDirectory)/Hercules.OpenLine.NET.CTe.nupkg'
+#      ArtifactName: 'hercules.cte'
+#      publishLocation: 'Container'
