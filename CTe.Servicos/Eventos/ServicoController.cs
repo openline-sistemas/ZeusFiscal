@@ -48,13 +48,13 @@ namespace CTe.Servicos.Eventos
 
             if (evento.versao == versao.ve200 || evento.versao == versao.ve300)
             {
-                var webService = WsdlFactory.CriaWsdlCteEvento(configServico);
+                var webService = WsdlFactory.CriaWsdlCteEvento(configServico, ufUrl: cOrgao);
                 retornoXml = webService.cteRecepcaoEvento(evento.CriaXmlRequestWs());
             }
 
             if (evento.versao == versao.ve400)
             {
-                var webService = WsdlFactory.CriaWsdlCteEventoV4(configServico);
+                var webService = WsdlFactory.CriaWsdlCteEventoV4(configServico, ufUrl: cOrgao);
                 retornoXml = webService.cteRecepcaoEvento(evento.CriaXmlRequestWs());
             }
 
