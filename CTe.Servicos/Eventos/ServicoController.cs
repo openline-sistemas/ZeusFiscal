@@ -33,10 +33,10 @@ namespace CTe.Servicos.Eventos
             return await ExecutarAsync(cTeTipoEvento, sequenciaEvento, cte.Chave(), cte.infCte.emit.CNPJ, container, configServico);
         }
 
-        public retEventoCTe Executar(CTeTipoEvento cTeTipoEvento, int sequenciaEvento, string chave, string cnpj, EventoContainer container, ConfiguracaoServico configuracaoServico = null)
+        public retEventoCTe Executar(CTeTipoEvento cTeTipoEvento, int sequenciaEvento, string chave, string cnpj, EventoContainer container, ConfiguracaoServico configuracaoServico = null, DFe.Classes.Entidades.Estado? cOrgao = null)
         {
             var configServico = configuracaoServico ?? ConfiguracaoServico.Instancia;
-            var evento = FactoryEvento.CriaEvento(cTeTipoEvento, sequenciaEvento, chave, cnpj, container, configServico);
+            var evento = FactoryEvento.CriaEvento(cTeTipoEvento, sequenciaEvento, chave, cnpj, container, configServico, cOrgao);
             evento.Assina(configServico);
 
             if (configuracaoServico.IsValidaSchemas)
@@ -68,11 +68,12 @@ namespace CTe.Servicos.Eventos
             int sequenciaEvento,
             string chave, string
             cnpj, EventoContainer container,
-            ConfiguracaoServico configuracaoServico = null)
+            ConfiguracaoServico configuracaoServico = null, 
+            DFe.Classes.Entidades.Estado? cOrgao = null)
         {
             var configServico = configuracaoServico ?? ConfiguracaoServico.Instancia;
 
-            var evento = FactoryEvento.CriaEvento(cTeTipoEvento, sequenciaEvento, chave, cnpj, container, configServico);
+            var evento = FactoryEvento.CriaEvento(cTeTipoEvento, sequenciaEvento, chave, cnpj, container, configServico, cOrgao);
             evento.Assina(configServico);
 
             if (configServico.IsValidaSchemas)
