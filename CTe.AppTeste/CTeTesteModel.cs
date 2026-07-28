@@ -569,9 +569,10 @@ namespace CTe.AppTeste
         {
             var configuracaoCertificado = new ConfiguracaoCertificado
             {
+                TipoCertificado = TipoCertificado.A1Arquivo,
                 Arquivo = config.CertificadoDigital.CaminhoArquivo,
-                TipoCertificado = TipoCertificado.A1Repositorio,
                 ManterDadosEmCache = config.CertificadoDigital.ManterEmCache,
+                Senha = config.CertificadoDigital.Senha,
                 Serial = config.CertificadoDigital.NumeroDeSerie
             };
 
