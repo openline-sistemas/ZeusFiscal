@@ -41,7 +41,7 @@ namespace CTe.Servicos.Eventos
             var eventoCancelaDiscordar = ClassesFactory.CriaEvCancPrestDesacordo(_nProtEvPrestDes);
 
             EventoEnviado = FactoryEvento.CriaEvento(CTeTipoEvento.CancelamentoPrestacaodoServicoemDesacordo, _sequenciaEvento, _chave, _cnpj, eventoCancelaDiscordar, configServico, orgaoEmissor);
-            RetornoSefaz = await new ServicoController().ExecutarAsync(CTeTipoEvento.CancelamentoPrestacaodoServicoemDesacordo, _sequenciaEvento, _chave, _cnpj, eventoCancelaDiscordar, configServico);
+            RetornoSefaz = await new ServicoController().ExecutarAsync(CTeTipoEvento.CancelamentoPrestacaodoServicoemDesacordo, _sequenciaEvento, _chave, _cnpj, eventoCancelaDiscordar, configServico, orgaoEmissor);
 
             return RetornoSefaz;
         }

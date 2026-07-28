@@ -81,7 +81,7 @@ namespace CTe.Servicos.Eventos
 
             evento.SalvarXmlEmDisco(configServico);
 
-            var webService = WsdlFactory.CriaWsdlCteEvento(configServico);
+            var webService = WsdlFactory.CriaWsdlCteEvento(configServico, ufUrl: cOrgao);
             var retornoXml = await webService.cteRecepcaoEventoAsync(evento.CriaXmlRequestWs());
 
             var retorno = retEventoCTe.LoadXml(retornoXml.OuterXml, evento);
