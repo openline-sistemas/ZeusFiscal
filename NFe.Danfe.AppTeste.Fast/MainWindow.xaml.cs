@@ -355,10 +355,19 @@ namespace NFe.Danfe.AppTeste
                 #region Abre a visualização do relatório para impressão
 
                 var danfe = new DanfeFrSimplificadoTipo2(proc: proc,
-                                    configuracaoDanfeNfce: _configuracoes.ConfiguracaoDanfeNfce,
-                                    configuracaoDanfeNfe: new ConfiguracaoDanfeNfe()
+                                    configuracao: new ConfiguracaoDanfeNfeSimplificadoTipo2
                                     {
                                         Logomarca = _configuracoes.ConfiguracaoDanfeNfce.Logomarca,
+                                        DetalheVendaNormal = (NfeSimplificadoTipo2DetalheVendaNormal)(int)_configuracoes.ConfiguracaoDanfeNfce.DetalheVendaNormal,
+                                        DetalheVendaContigencia = (NfeSimplificadoTipo2DetalheVendaContigencia)(int)_configuracoes.ConfiguracaoDanfeNfce.DetalheVendaContigencia,
+                                        ImprimeDescontoItem = _configuracoes.ConfiguracaoDanfeNfce.ImprimeDescontoItem,
+                                        ImprimeFoneEmitente = _configuracoes.ConfiguracaoDanfeNfce.ImprimeFoneEmitente,
+                                        MargemEsquerda = _configuracoes.ConfiguracaoDanfeNfce.MargemEsquerda,
+                                        MargemDireita = _configuracoes.ConfiguracaoDanfeNfce.MargemDireita,
+                                        ModoImpressao = (NfeSimplificadoTipo2ModoImpressao)(int)_configuracoes.ConfiguracaoDanfeNfce.ModoImpressao,
+                                        LayoutQrCode = (NfeSimplificadoTipo2LayoutQrCode)(int)_configuracoes.ConfiguracaoDanfeNfce.NfceLayoutQrCode,
+                                        VersaoQrCode = _configuracoes.ConfiguracaoDanfeNfce.VersaoQrCode,
+                                        SegundaViaContingencia = _configuracoes.ConfiguracaoDanfeNfce.SegundaViaContingencia,
                                         DuasLinhas = RdbDuasLinhas.IsChecked == true || RdbCompleto.IsChecked == true,
                                         DocumentoCancelado = ChbCancelado.IsChecked ?? false,
                                         QuebrarLinhasObservacao = _configuracoes.ConfiguracaoDanfeNfe.QuebrarLinhasObservacao,

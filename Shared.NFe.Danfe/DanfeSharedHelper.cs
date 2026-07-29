@@ -293,60 +293,59 @@ namespace Shared.DFe.Danfe
             relatorio.SetParameterValue("DataHoraImpressao", configuracaoDanfeNfe.DataHoraImpressao ?? DateTime.Now);
         }
 
-        public static Report GenerateDanfeFrNfeReport(nfeProc proc, ConfiguracaoDanfeNfce configuracaoDanfeNfce, ConfiguracaoDanfeNfe configuracaoDanfeNfe, string cIdToken, string csc, byte[] frx, string desenvolvedor, string arquivoRelatorio, string textoRodape = "")
+        public static Report GenerateDanfeFrNfeSimplificadoTipo2Report(nfeProc proc, ConfiguracaoDanfeNfeSimplificadoTipo2 configuracao, string cIdToken, string csc, byte[] frx, string desenvolvedor, string arquivoRelatorio, string textoRodape = "")
         {
             Report relatorio = new Report();
-            relatorio.RegisterData(new[] { proc }, "NFCe", 20);
-            relatorio.GetDataSource("NFCe").Enabled = true;
 
-            if (string.IsNullOrEmpty(arquivoRelatorio))
-            {
-                relatorio.Load(new MemoryStream(frx));
-            }
-            else
-            {
+            if (!string.IsNullOrEmpty(arquivoRelatorio))
                 relatorio.Load(arquivoRelatorio);
-            }
-
-            relatorio.SetParameterValue("NfceDetalheVendaNormal", configuracaoDanfeNfce.DetalheVendaNormal);
-            relatorio.SetParameterValue("NfceDetalheVendaContigencia", configuracaoDanfeNfce.DetalheVendaContigencia);
-            relatorio.SetParameterValue("NfceImprimeDescontoItem", configuracaoDanfeNfce.ImprimeDescontoItem);
-            relatorio.SetParameterValue("NfceImprimeFoneEmitente", configuracaoDanfeNfce.ImprimeFoneEmitente);
-            var total = proc?.NFe?.infNFe?.total;
-            if (total?.IBSCBSTot?.gCBS != null)
-                relatorio.SetParameterValue("vCBS", total.IBSCBSTot.gCBS.vCBS);
-            if (total?.IBSCBSTot?.gIBS != null)
-                relatorio.SetParameterValue("vIBS", total.IBSCBSTot.gIBS.vIBS);
-            if (total?.ISTot != null)
-                relatorio.SetParameterValue("vIS", total.ISTot.vIS);
+            else if (frx != null && frx.Length > 0)
+                relatorio.Load(new MemoryStream(frx));
             else
-                relatorio.SetParameterValue("vIS", (decimal)0);
+                throw new Exception("Erro em DanfeSharedHelper.GenerateDanfeFrNfeSimplificadoTipo2Report no Zeus.DFe. Relatório não encontrado, passe os parametros 'frx' com bytes ou 'arquivoRelatorio' com o caminho do arquivo");
+
+            relatorio.RegisterData(new[] { proc }, "NFe", 20);
+            relatorio.GetDataSource("NFe").Enabled = true;
+
+            relatorio.SetParameterValue("NfeSimplificadoTipo2DetalheVendaNormal", configuracao.DetalheVendaNormal);
+            relatorio.SetParameterValue("NfeSimplificadoTipo2DetalheVendaContigencia", configuracao.DetalheVendaContigencia);
+            relatorio.SetParameterValue("NfeSimplificadoTipo2ImprimeDescontoItem", configuracao.ImprimeDescontoItem);
+            relatorio.SetParameterValue("NfeSimplificadoTipo2ImprimeFoneEmitente", configuracao.ImprimeFoneEmitente);
 
             string foneEmitente = null;
 
             if (proc.NFe.infNFe.emit.enderEmit.fone != null)
-            {
                 foneEmitente = proc.NFe.infNFe.emit.enderEmit.fone.ToString();
-            }
 
             if (foneEmitente != null && foneEmitente.Length == 10)
                 foneEmitente = string.Format("{0:(00)0000-0000}", Convert.ToInt64(foneEmitente));
             else if (foneEmitente != null && foneEmitente.Length == 11)
                 foneEmitente = string.Format("{0:(00)00000-0000}", Convert.ToInt64(foneEmitente));
 
-            relatorio.SetParameterValue("NfceFoneEmitente", foneEmitente);
-            relatorio.SetParameterValue("NfceModoImpressao", configuracaoDanfeNfce.ModoImpressao);
-            relatorio.SetParameterValue("NfceCancelado", configuracaoDanfeNfce.DocumentoCancelado);
-            relatorio.SetParameterValue("NfceLayoutQrCode", configuracaoDanfeNfce.NfceLayoutQrCode);
+            relatorio.SetParameterValue("NfeSimplificadoTipo2FoneEmitente", foneEmitente);
+            relatorio.SetParameterValue("NfeSimplificadoTipo2ModoImpressao", configuracao.ModoImpressao);
+            relatorio.SetParameterValue("NfeSimplificadoTipo2Cancelado", configuracao.DocumentoCancelado);
+            relatorio.SetParameterValue("NfeSimplificadoTipo2LayoutQrCode", configuracao.LayoutQrCode);
             relatorio.SetParameterValue("TextoRodape", textoRodape);
-            ((ReportPage)relatorio.FindObject("PgNfce")).LeftMargin = configuracaoDanfeNfce.MargemEsquerda;
-            ((ReportPage)relatorio.FindObject("PgNfce")).RightMargin = configuracaoDanfeNfce.MargemDireita;
 
-            ((PictureObject)relatorio.FindObject("poEmitLogo")).SetImageData(configuracaoDanfeNfce.Logomarca);
+            ((ReportPage)relatorio.FindObject("PgNfeSimplificadoTipo2")).LeftMargin = configuracao.MargemEsquerda;
+            ((ReportPage)relatorio.FindObject("PgNfeSimplificadoTipo2")).RightMargin = configuracao.MargemDireita;
 
-            ((TextObject)relatorio.FindObject("txtUrl")).Text = string.IsNullOrEmpty(proc.NFe.infNFeSupl.urlChave) ? proc.NFe.infNFeSupl.ObterUrlConsulta(proc.NFe, configuracaoDanfeNfce.VersaoQrCode) : proc.NFe.infNFeSupl.urlChave;
-            ((BarcodeObject)relatorio.FindObject("bcoQrCode")).Text = proc.NFe.infNFeSupl == null ? proc.NFe.infNFeSupl.ObterUrlQrCode(proc.NFe, configuracaoDanfeNfce.VersaoQrCode, cIdToken, csc) : proc.NFe.infNFeSupl.qrCode;
-            ((BarcodeObject)relatorio.FindObject("bcoQrCodeLateral")).Text = proc.NFe.infNFeSupl == null ? proc.NFe.infNFeSupl.ObterUrlQrCode(proc.NFe, configuracaoDanfeNfce.VersaoQrCode, cIdToken, csc) : proc.NFe.infNFeSupl.qrCode;
+            var logomarcaEmitDefinida = configuracao.Logomarca != null && configuracao.Logomarca.Length > 0;
+            var rtbEmitLogo = relatorio.FindObject("rtbEmitLogo") as ReportTitleBand;
+            if (rtbEmitLogo != null)
+            {
+                rtbEmitLogo.Visible = logomarcaEmitDefinida;
+                if (logomarcaEmitDefinida)
+                {
+                    var poEmitLogo = relatorio.FindObject("poEmitLogo") as PictureObject;
+                    poEmitLogo?.SetImageData(configuracao.Logomarca);
+                }
+            }
+
+            ((TextObject)relatorio.FindObject("txtUrl")).Text = string.IsNullOrEmpty(proc.NFe.infNFeSupl.urlChave) ? proc.NFe.infNFeSupl.ObterUrlConsulta(proc.NFe, configuracao.VersaoQrCode) : proc.NFe.infNFeSupl.urlChave;
+            ((BarcodeObject)relatorio.FindObject("bcoQrCode")).Text = proc.NFe.infNFeSupl == null ? proc.NFe.infNFeSupl.ObterUrlQrCode(proc.NFe, configuracao.VersaoQrCode, cIdToken, csc) : proc.NFe.infNFeSupl.qrCode;
+            ((BarcodeObject)relatorio.FindObject("bcoQrCodeLateral")).Text = proc.NFe.infNFeSupl == null ? proc.NFe.infNFeSupl.ObterUrlQrCode(proc.NFe, configuracao.VersaoQrCode, cIdToken, csc) : proc.NFe.infNFeSupl.qrCode;
 
             string mensagem = string.Empty;
             string resumoCanhoto = string.Empty;
@@ -355,12 +354,12 @@ namespace Shared.DFe.Danfe
             string consultaAutenticidade = "Consulta de autenticidade no portal nacional da NF-e" + Environment.NewLine +
                                         "www.nfe.fazenda.gov.br/portal ou no site da Sefaz autorizadora";
 
-            if (configuracaoDanfeNfe.ExibirResumoCanhoto)
+            if (configuracao.ExibirResumoCanhoto)
             {
-                resumoCanhoto = string.IsNullOrEmpty(configuracaoDanfeNfe.ResumoCanhoto) ?
+                resumoCanhoto = string.IsNullOrEmpty(configuracao.ResumoCanhoto) ?
                                 string.Format("Emissão: {0: dd/MM/yyyy} Dest/Reme: {1} Valor Total: {2:C}", proc.NFe.infNFe.ide.dhEmi,
                                                 proc.NFe.infNFe.dest.xNome, proc.NFe.infNFe.total.ICMSTot.vNF) :
-                                configuracaoDanfeNfe.ResumoCanhoto;
+                                configuracao.ResumoCanhoto;
             }
 
             if (proc.NFe.infNFe.ide.tpAmb == TipoAmbiente.Homologacao)
@@ -392,7 +391,7 @@ namespace Shared.DFe.Danfe
             }
             else
             {
-                if (configuracaoDanfeNfe.DocumentoCancelado ||
+                if (configuracao.DocumentoCancelado ||
                     (proc.protNFe != null && proc.protNFe.infProt != null &&
                     !string.IsNullOrEmpty(proc.protNFe.infProt.nProt) &&
                     (proc.protNFe.infProt.cStat == 101 ||
@@ -425,7 +424,7 @@ namespace Shared.DFe.Danfe
                 case TipoEmissao.teSVCRS:
                     contingenciaDescricao = "PROTOCOLO DE AUTORIZAÇÃO DE USO";
                     contingenciaValor = ((proc.protNFe == null || proc.protNFe.infProt == null || string.IsNullOrEmpty(proc.protNFe.infProt.nProt)) ? "NFe sem Autorização de Uso da SEFAZ" : string.Format("{0} - {1:dd/MM/yyyy HH:mm:ss}", proc.protNFe.infProt.nProt, proc.protNFe.infProt.dhRecbto));
-                    if (configuracaoDanfeNfe.DocumentoCancelado || (proc.protNFe != null && proc.protNFe.infProt != null && (proc.protNFe.infProt.cStat == 101 || proc.protNFe.infProt.cStat == 151 || proc.protNFe.infProt.cStat == 155)))
+                    if (configuracao.DocumentoCancelado || (proc.protNFe != null && proc.protNFe.infProt != null && (proc.protNFe.infProt.cStat == 101 || proc.protNFe.infProt.cStat == 151 || proc.protNFe.infProt.cStat == 155)))
                     {
                         contingenciaDescricao = "PROTOCOLO DE HOMOLOGAÇÃO DO CANCELAMENTO";
                     }
@@ -439,7 +438,7 @@ namespace Shared.DFe.Danfe
                 case TipoEmissao.teEPEC:
                 case TipoEmissao.teFSDA:
                     contingenciaDescricao = "DADOS DA NF-E";
-                    contingenciaValor = Regex.Replace(configuracaoDanfeNfe.ChaveContingencia, ".{4}", "$0 ");
+                    contingenciaValor = Regex.Replace(configuracao.ChaveContingencia, ".{4}", "$0 ");
                     consultaAutenticidade = string.Empty;
                     break;
 
@@ -453,20 +452,25 @@ namespace Shared.DFe.Danfe
             relatorio.SetParameterValue("ConsultaAutenticidade", consultaAutenticidade);
             relatorio.SetParameterValue("ContingenciaDescricao", contingenciaDescricao);
             relatorio.SetParameterValue("ContingenciaValor", contingenciaValor);
-            relatorio.SetParameterValue("ContingenciaID", configuracaoDanfeNfe.ChaveContingencia);
-            relatorio.SetParameterValue("DuasLinhas", configuracaoDanfeNfe.DuasLinhas);
+            relatorio.SetParameterValue("ContingenciaID", configuracao.ChaveContingencia);
+            relatorio.SetParameterValue("DuasLinhas", configuracao.DuasLinhas);
             relatorio.SetParameterValue("Desenvolvedor", desenvolvedor);
-            relatorio.SetParameterValue("QuebrarLinhasObservacao", configuracaoDanfeNfe.QuebrarLinhasObservacao);
-            relatorio.SetParameterValue("ImprimirISSQN", configuracaoDanfeNfe.ImprimirISSQN);
-            relatorio.SetParameterValue("ImprimirDescPorc", configuracaoDanfeNfe.ImprimirDescPorc);
-            relatorio.SetParameterValue("ImprimirTotalLiquido", configuracaoDanfeNfe.ImprimirTotalLiquido);
-            relatorio.SetParameterValue("ImprimirUnidQtdeValor", configuracaoDanfeNfe.ImprimirUnidQtdeValor);
-            relatorio.SetParameterValue("ExibeCampoFatura", configuracaoDanfeNfe.ExibeCampoFatura);
-            relatorio.SetParameterValue("Logo", configuracaoDanfeNfe.Logomarca);
-            relatorio.SetParameterValue("ExibirTotalTributos", configuracaoDanfeNfe.ExibirTotalTributos);
-            relatorio.SetParameterValue("DecimaisValorUnitario", configuracaoDanfeNfe.DecimaisValorUnitario);
-            relatorio.SetParameterValue("DecimaisQuantidadeItem", configuracaoDanfeNfe.DecimaisQuantidadeItem);
-            relatorio.SetParameterValue("DataHoraImpressao", configuracaoDanfeNfe.DataHoraImpressao ?? DateTime.Now);
+            relatorio.SetParameterValue("QuebrarLinhasObservacao", configuracao.QuebrarLinhasObservacao);
+            relatorio.SetParameterValue("ImprimirISSQN", configuracao.ImprimirISSQN);
+            relatorio.SetParameterValue("ImprimirDescPorc", configuracao.ImprimirDescPorc);
+            relatorio.SetParameterValue("ImprimirTotalLiquido", configuracao.ImprimirTotalLiquido);
+            relatorio.SetParameterValue("ImprimirUnidQtdeValor", configuracao.ImprimirUnidQtdeValor);
+            relatorio.SetParameterValue("ExibeCampoFatura", configuracao.ExibeCampoFatura);
+            relatorio.SetParameterValue("Logo", configuracao.Logomarca);
+            relatorio.SetParameterValue("ExibirTotalTributos", configuracao.ExibirTotalTributos);
+            relatorio.SetParameterValue("DecimaisValorUnitario", configuracao.DecimaisValorUnitario);
+            relatorio.SetParameterValue("DecimaisQuantidadeItem", configuracao.DecimaisQuantidadeItem);
+            relatorio.SetParameterValue("DataHoraImpressao", configuracao.DataHoraImpressao ?? DateTime.Now);
+
+#if !openfastreport && !fastskia
+            if (configuracao.SegundaViaContingencia)
+                relatorio.PrintSettings.Copies = (proc.NFe.infNFe.ide.tpEmis == TipoEmissao.teNormal | (proc.protNFe != null && proc.protNFe.infProt != null && NfeSituacao.Autorizada(proc.protNFe.infProt.cStat))) ? 1 : 2;
+#endif
 
             return relatorio;
         }
