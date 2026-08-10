@@ -160,9 +160,9 @@ namespace NFe.Danfe.AppTeste
                                     desenvolvedor: "NOME DA SOFTWARE HOUSE",
                                     arquivoRelatorio: string.Empty);
 
-                //danfe.Visualizar();
+                danfe.Visualizar();
                 //danfe.Imprimir();
-                danfe.ExibirDesign();
+                //danfe.ExibirDesign();
                 //danfe.ExportarPdf(@"d:\teste.pdf");
 
                 #endregion Abre a visualização do relatório para impressão
@@ -312,9 +312,9 @@ namespace NFe.Danfe.AppTeste
                                     desenvolvedor: "NOME DA SOFTWARE HOUSE",
                                     arquivoRelatorio: string.Empty);
 
-                //danfe.Visualizar();
+                danfe.Visualizar();
                 //danfe.Imprimir();
-                danfe.ExibirDesign();
+                //danfe.ExibirDesign();
                 //danfe.ExportarPdf(@"d:\teste.pdf");
 
                 #endregion Abre a visualização do relatório para impressão
@@ -381,14 +381,14 @@ namespace NFe.Danfe.AppTeste
                                         ImprimirUnidQtdeValor = _configuracoes.ConfiguracaoDanfeNfe.ImprimirUnidQtdeValor,
                                         ExibirTotalTributos = _configuracoes.ConfiguracaoDanfeNfe.ExibirTotalTributos
                                     },
-                                    "",
-                                    "",
+                                    _configuracoes.CIdToken,
+                                    _configuracoes.Csc,
                                     desenvolvedor: "NOME DA SOFTWARE HOUSE",
                                     arquivoRelatorio: string.Empty);
 
-                //danfe.Visualizar();
+                danfe.Visualizar();
                 //danfe.Imprimir();
-                danfe.ExibirDesign();
+                //danfe.ExibirDesign();
                 //danfe.ExportarPdf(@"d:\teste.pdf");
 
                 #endregion Abre a visualização do relatório para impressão

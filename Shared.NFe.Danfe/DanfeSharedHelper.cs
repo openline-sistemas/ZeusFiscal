@@ -343,7 +343,7 @@ namespace Shared.DFe.Danfe
                 }
             }
 
-            ((TextObject)relatorio.FindObject("txtUrl")).Text = string.IsNullOrEmpty(proc.NFe.infNFeSupl.urlChave) ? proc.NFe.infNFeSupl.ObterUrlConsulta(proc.NFe, configuracao.VersaoQrCode) : proc.NFe.infNFeSupl.urlChave;
+            ((TextObject)relatorio.FindObject("txtUrl")).Text = string.IsNullOrEmpty(proc.NFe.infNFeSupl?.urlChave) ? proc.NFe.infNFeSupl.ObterUrlConsulta(proc.NFe, configuracao.VersaoQrCode) : proc.NFe.infNFeSupl.urlChave;
             ((BarcodeObject)relatorio.FindObject("bcoQrCode")).Text = proc.NFe.infNFeSupl == null ? proc.NFe.infNFeSupl.ObterUrlQrCode(proc.NFe, configuracao.VersaoQrCode, cIdToken, csc) : proc.NFe.infNFeSupl.qrCode;
             ((BarcodeObject)relatorio.FindObject("bcoQrCodeLateral")).Text = proc.NFe.infNFeSupl == null ? proc.NFe.infNFeSupl.ObterUrlQrCode(proc.NFe, configuracao.VersaoQrCode, cIdToken, csc) : proc.NFe.infNFeSupl.qrCode;
 
