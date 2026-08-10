@@ -81,8 +81,19 @@ namespace CTe.Servicos.Eventos
 
             evento.SalvarXmlEmDisco(configServico);
 
-            var webService = WsdlFactory.CriaWsdlCteEvento(configServico, ufUrl: cOrgao);
-            var retornoXml = await webService.cteRecepcaoEventoAsync(evento.CriaXmlRequestWs());
+            XmlNode retornoXml = null;
+
+            if (evento.versao == versao.ve200 || evento.versao == versao.ve300)
+            {
+                var webService = WsdlFactory.CriaWsdlCteEvento(configServico, ufUrl: cOrgao);
+                retornoXml = await webService.cteRecepcaoEvento(evento.CriaXmlRequestWs());
+            }
+
+            if (evento.versao == versao.ve400)
+            {
+                var webService = WsdlFactory.CriaWsdlCteEventoV4(configServico, ufUrl: cOrgao);
+                retornoXml = await webService.cteRecepcaoEvento(evento.CriaXmlRequestWs());
+            }
 
             var retorno = retEventoCTe.LoadXml(retornoXml.OuterXml, evento);
             retorno.SalvarXmlEmDisco(configServico);
