@@ -64,12 +64,7 @@ namespace CTe.Servicos.Eventos
             return retorno;
         }
 
-        public async Task<retEventoCTe> ExecutarAsync(CTeTipoEvento cTeTipoEvento,
-            int sequenciaEvento,
-            string chave, string
-            cnpj, EventoContainer container,
-            ConfiguracaoServico configuracaoServico = null, 
-            DFe.Classes.Entidades.Estado? cOrgao = null)
+        public async Task<retEventoCTe> ExecutarAsync(CTeTipoEvento cTeTipoEvento, int sequenciaEvento, string chave, string cnpj, EventoContainer container, ConfiguracaoServico configuracaoServico = null, DFe.Classes.Entidades.Estado? cOrgao = null)
         {
             var configServico = configuracaoServico ?? ConfiguracaoServico.Instancia;
 
@@ -86,13 +81,13 @@ namespace CTe.Servicos.Eventos
             if (evento.versao == versao.ve200 || evento.versao == versao.ve300)
             {
                 var webService = WsdlFactory.CriaWsdlCteEvento(configServico, ufUrl: cOrgao);
-                retornoXml = await webService.cteRecepcaoEvento(evento.CriaXmlRequestWs());
+                retornoXml = webService.cteRecepcaoEvento(evento.CriaXmlRequestWs());
             }
 
             if (evento.versao == versao.ve400)
             {
                 var webService = WsdlFactory.CriaWsdlCteEventoV4(configServico, ufUrl: cOrgao);
-                retornoXml = await webService.cteRecepcaoEvento(evento.CriaXmlRequestWs());
+                retornoXml = webService.cteRecepcaoEvento(evento.CriaXmlRequestWs());
             }
 
             var retorno = retEventoCTe.LoadXml(retornoXml.OuterXml, evento);
