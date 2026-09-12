@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+	<Target Name="AfterBuild">
+		<Copy
+		  SourceFiles="$(MSBuildThisFileDirectory)MDFe\MDFeRetrato.frx"
+		  DestinationFiles="$(OutDir)\MDFe\MDFeRetrato.frx"
+		  SkipUnchangedFiles="false"
+		  OverwriteReadOnlyFiles="true"
+		  Retries="3"
+		  RetryDelayMilliseconds="300" />
+	</Target>
+	
+	
+	<Target Name="CopyFilesToProject" BeforeTargets="BeforeBuild">
+		<Copy
+		  SourceFiles="$(MSBuildThisFileDirectory)MDFe\MDFeRetrato.frx"
+		  DestinationFiles="$(OutDir)\MDFe\MDFeRetrato.frx"
+		  SkipUnchangedFiles="false"
+		  OverwriteReadOnlyFiles="true"
+		  Retries="3"
+		  RetryDelayMilliseconds="300" />
+	</Target>
+	
+	<Target Name="PublishCopyFiles" AfterTargets="Publish">
+		<Copy
+		  SourceFiles="$(MSBuildThisFileDirectory)MDFe\MDFeRetrato.frx"
+		  DestinationFiles="$(PublishDir)\MDFe\MDFeRetrato.frx"
+		  SkipUnchangedFiles="false"
+		  OverwriteReadOnlyFiles="true"
+		  Retries="3"
+		  RetryDelayMilliseconds="300" />
+	</Target>
+	
+</Project>
+

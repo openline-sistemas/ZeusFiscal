@@ -150,10 +150,26 @@ steps:
       workingDirectory: '$(Build.SourcesDirectory)'
 
   - task: DotNetCoreCLI@2
+    displayName: "Build Damdfe Base"
+    inputs:
+      command: 'build'
+      projects: './MDFe.Damdfe.Base/MDFe.Damdfe.Base.csproj'
+      arguments: '-c "Release"'
+      workingDirectory: '$(Build.SourcesDirectory)'
+
+  - task: DotNetCoreCLI@2
     displayName: "Build Damdfe OpenFast"
     inputs:
       command: 'build'
       projects: './MDFe.Damdfe.OpenFast/MDFe.Damdfe.OpenFast.csproj'
+      arguments: '-c "Release"'
+      workingDirectory: '$(Build.SourcesDirectory)'
+
+  - task: DotNetCoreCLI@2
+    displayName: "Build Damdfe Fast Skia"
+    inputs:
+      command: 'build'
+      projects: './MDFe.Damdfe.Fast.Skia/MDFe.Damdfe.Fast.Skia.csproj'
       arguments: '-c "Release"'
       workingDirectory: '$(Build.SourcesDirectory)'
 
@@ -205,6 +221,14 @@ steps:
       arguments: '-c "Release"'
       workingDirectory: '$(Build.SourcesDirectory)'
 
+  - task: DotNetCoreCLI@2
+    displayName: "Build Cte Dacte Fast Skia"
+    inputs:
+      command: 'build'
+      projects: './CTe.Dacte.Fast.Skia/CTe.Dacte.Fast.Skia.csproj'
+      arguments: '-c "Release"'
+      workingDirectory: '$(Build.SourcesDirectory)'
+
   #########################################################
   # CTe.Dacte.Fast é net462-only (WinForms + FastReport   #
   # clássico) e não compila em agente Linux. Não é mais   #
@@ -240,4 +264,19 @@ steps:
     inputs:
       PathtoPublish: '$(Build.ArtifactStagingDirectory)/Hercules.OpenLine.NET.CTe.nupkg'
       ArtifactName: 'hercules.cte'
+      publishLocation: 'Container'
+
+  - task: NuGetCommand@2
+    displayName: Gera Pacote Hercules.OpenLine.NET.MDFe
+    inputs:
+      command: 'pack'
+      packagesToPack: '$(Build.SourcesDirectory)/NuGet/Hercules.NET.MDFe/Hercules.OpenLine.NET.MDFe.nuspec'
+      packDestination: '$(Build.ArtifactStagingDirectory)/Hercules.OpenLine.NET.MDFe.nupkg'
+      versioningScheme: 'off'
+
+  - task: PublishBuildArtifacts@1
+    displayName: Publica Aterfato Hercules.OpenLine.NET.MDFe
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)/Hercules.OpenLine.NET.MDFe.nupkg'
+      ArtifactName: 'hercules.mdfe'
       publishLocation: 'Container'

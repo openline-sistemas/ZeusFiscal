@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
 		<id>Hercules.Openline.CTe</id>
-		<version>1.3.2</version>
+		<version>1.3.3</version>
 		<title>Hercules.NET Openline CT-e</title>
 		<authors>Hercules.NET</authors>
 		<owners>Hercules.NET</owners>
@@ -24,15 +24,11 @@
 			</group>
 
 			<group targetFramework="net8.0">
-				<dependency id="System.Drawing.Common" version="8.0.0" />
-				<dependency id="FastReport.OpenSource" version="2026.1.2" />
-				<dependency id="FastReport.OpenSource.Export.PdfSimple" version="2026.1.2" />
+				<dependency id="SkiaSharp" version="2.88.7" />
 			</group>
 
 			<group targetFramework="net9.0">
-				<dependency id="System.Drawing.Common" version="9.0.0" />
-				<dependency id="FastReport.OpenSource" version="2026.1.2" />
-				<dependency id="FastReport.OpenSource.Export.PdfSimple" version="2026.1.2" />
+				<dependency id="SkiaSharp" version="2.88.7" />
 			</group>
 
 		</dependencies>
@@ -56,7 +52,7 @@
 		<file src="../../CTe.Utils/bin/Release/net8.0/CTe.Utils.dll" target="lib/net8.0/CTe.Utils.dll" />
 		<file src="../../CTe.Wsdl/bin/Release/net8.0/CTe.Wsdl.dll" target="lib/net8.0/CTe.Wsdl.dll" />
 		<file src="../../CTe.Dacte.Base/bin/Release/net8.0/CTe.Dacte.Base.dll" target="lib/net8.0/CTe.Dacte.Base.dll" />
-		<file src="../../CTe.Dacte.OpenFast/bin/Release/net8.0/CTe.Dacte.OpenFast.dll" target="lib/net8.0/CTe.Dacte.OpenFast.dll" />
+		<file src="../../CTe.Dacte.Fast.Skia/bin/Release/net8.0/CTe.Dacte.Fast.Skia.dll" target="lib/net8.0/CTe.Dacte.Fast.Skia.dll" />
 
 		<file src="../../DFe.Classes/bin/Release/net9.0/DFe.Classes.dll" target="lib/net9.0/DFe.Classes.dll" />
 		<file src="../../DFe.Utils/bin/Release/net9.0/DFe.Utils.dll" target="lib/net9.0/DFe.Utils.dll" />
@@ -66,7 +62,7 @@
 		<file src="../../CTe.Utils/bin/Release/net9.0/CTe.Utils.dll" target="lib/net9.0/CTe.Utils.dll" />
 		<file src="../../CTe.Wsdl/bin/Release/net9.0/CTe.Wsdl.dll" target="lib/net9.0/CTe.Wsdl.dll" />
 		<file src="../../CTe.Dacte.Base/bin/Release/net9.0/CTe.Dacte.Base.dll" target="lib/net9.0/CTe.Dacte.Base.dll" />
-		<file src="../../CTe.Dacte.OpenFast/bin/Release/net9.0/CTe.Dacte.OpenFast.dll" target="lib/net9.0/CTe.Dacte.OpenFast.dll" />
+		<file src="../../CTe.Dacte.Fast.Skia/bin/Release/net9.0/CTe.Dacte.Fast.Skia.dll" target="lib/net9.0/CTe.Dacte.Fast.Skia.dll" />
 
 		<file src="Hercules.OpenLine.NET.CTe.targets" target="build/Hercules.OpenLine.CTe.targets" />
 		<file src="../../CTe.Dacte.Base/CTe/CTeEvento.frx" target="build/CTe/CTeEvento.frx" />
